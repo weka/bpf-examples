@@ -12,6 +12,7 @@ struct {
 	__uint(max_entries, MAX_SOCKS);
 	__uint(key_size, sizeof(int));
 	__uint(value_size, sizeof(int));
+	__uint(pinning, LIBBPF_PIN_BY_NAME);
 } xsks_map SEC(".maps");
 
 int num_socks = 0;
