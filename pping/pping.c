@@ -2836,9 +2836,11 @@ int main(int argc, char *argv[])
 
 	err = parse_arguments(argc, argv, &config);
 	if (err) {
-		fprintf(stderr, "Failed parsing arguments:  %s\n",
+		fprintf(stderr, "Failed parsing arguments: %s\n",
 			get_libbpf_strerror(err));
-		print_usage(argv);
+		/* Usage text does not help with e.g. a missing interface */
+		if (err == -EINVAL)
+			print_usage(argv);
 		return EXIT_FAILURE;
 	}
 
