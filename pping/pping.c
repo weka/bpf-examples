@@ -332,7 +332,7 @@ static int parse_arguments(int argc, char *argv[], struct pping_config *config)
 			len = strlen(optarg);
 			if (len >= IF_NAMESIZE) {
 				fprintf(stderr, "interface name too long\n");
-				return -EINVAL;
+				return -ENAMETOOLONG;
 			}
 			memcpy(config->ifname, optarg, len);
 			config->ifname[len] = '\0';
