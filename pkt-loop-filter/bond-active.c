@@ -53,7 +53,7 @@ int get_bond_active_ifindex(int bond_ifindex)
 	struct bpf_link *trace_link = NULL;
         int ret = 0, fd = -1;
         __u64 netns_cookie;
-        size_t len;
+        ssize_t len;
 
         if (!if_indextoname(bond_ifindex, ifname))
                 return -errno;
@@ -102,6 +102,7 @@ int get_bond_active_ifindex(int bond_ifindex)
         if (len < 0) {
                 ret = -errno;
                 fprintf(stderr, "Couldn't read from %s: %s\n", fname, strerror(-ret));
+                goto out;
         }
 
         ret = write(fd, buf, len);
